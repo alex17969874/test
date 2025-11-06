@@ -4,26 +4,35 @@ class Program
 {
     static void Main()
     {
-        Console.Write("Enter: ");
-        int n = int.Parse(Console.ReadLine());
+        int secretNumber = 15;
 
-        n = Math.Abs(n);
-        int product = 1;
-        bool hasOdd = false;
+        Console.WriteLine("Опитайте се да познаете числото!");
 
-        foreach (char ch in n.ToString())
+        while (true)
         {
-            int digit = ch - '0';
-            if (digit % 2 != 0)
+            Console.Write("Въведете вашата догадка: ");
+            int guess;
+            bool isNumber = int.TryParse(Console.ReadLine(), out guess);
+
+            if (!isNumber)
             {
-                product *= digit;
-                hasOdd = true;
+                Console.WriteLine("Моля, въведете валидно число.");
+                continue;
+            }
+
+            if (guess < secretNumber)
+            {
+                Console.WriteLine("Your guess is lower");
+            }
+            else if (guess > secretNumber)
+            {
+                Console.WriteLine("Your guess is higher");
+            }
+            else
+            {
+                Console.WriteLine("You win!");
+                break;
             }
         }
-
-        if (hasOdd)
-            Console.WriteLine(product);
-        else
-            Console.WriteLine(0);
     }
 }
